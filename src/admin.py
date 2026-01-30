@@ -1,6 +1,6 @@
 import os
 from flask_admin import Admin
-from models import db, User, Character
+from models import db, User, Character, Locations
 from flask_admin.contrib.sqla import ModelView
 
 def setup_admin(app):
@@ -9,7 +9,7 @@ def setup_admin(app):
     admin = Admin(app, name='4Geeks Admin', template_mode='bootstrap3')
 
     class UserAdmin(ModelView):
-        form_columns = ["email","password", "favorites"]
+        form_columns = ["email","password", "favorites","favorite_locations"]
 
 
     
@@ -17,6 +17,7 @@ def setup_admin(app):
 
     admin.add_view(UserAdmin(User, db.session))
     admin.add_view(ModelView(Character, db.session))
+    admin.add_view(ModelView(Locations, db.session))
 
     # You can duplicate that line to add mew models
     # admin.add_view(ModelView(YourModelName, db.session))
